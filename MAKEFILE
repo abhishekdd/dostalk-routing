@@ -1,0 +1,11 @@
+# Couldn't get TLINK to work
+
+talk: talk.c link_api.c net_api.c link_api.h net_api.h
+    TCC -ml talk.c link_api.c net_api.c
+
+router: router.c link_api.c net_api.c link_api.h net_api.h
+	TCC -ml router.c link_api.c net_api.c 
+
+clean:
+    @DEL /Q *.obj *.exe
+

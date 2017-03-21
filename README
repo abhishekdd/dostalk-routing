@@ -1,0 +1,60 @@
+Computer Networks Lab (CS652) - Assignment 2
+
+Submitted 
+by -    Abhishek Das
+on -    14-Feb-2017
+--------------------------------------------------------------------------------
+
+Files:  
+        1. README file
+        2. DOS ova files from VirtualBox
+        3. Source code of programs
+--------------------------------------------------------------------------------
+
+DOS Setup:  The VMs using just dostalk program are configured to use 
+        PCnet-Fast III virtual network adapter and make use of PCNTPK packet 
+        driver. Their setup is identical to the the setup used in first 
+        assignment.
+
+            The VM used to run the router program is configured with two 
+        PCnet-Fast III virtual adapters each bridged with a different physical 
+        adapter on the host machine. Here the original PCNTPK driver cannot be 
+        used, since it is unable to detect more than one network interfaces in 
+        DOS. This problem is solved by a DOS program 'fixpcnt.com', provided by
+        VMWare. After copying this program in the same directory as the 
+        'pcntpk.com' driver when it is executed, it creates a patched copy of 
+        the driver named 'pcntpk2.com'. Now this copy can be used to load 
+        multiple copies of the driver associating each copy with a different 
+        network adapter.
+            PROMT> PCNTPK2.COM INT=0X61 IOADDR=0
+            PROMT> PCNTPK2.COM INT=0X62 IOADDR=1
+--------------------------------------------------------------------------------
+
+Program usage:  
+
+router.exe: It is executed with no arguments. 
+                PROMPT> router.exe
+
+            There is an interactive prompt which reads one character; 
+            if 'y' or 'Y' is pressed the program terminates otherwise the prompt
+            is repeated.
+
+talk.exe:   It expects two arguments. The first being the IIP address of that 
+            host and second is the IIP address of the router interface in the 
+            same network. The IIP addresses are two hexadecimal numbes in the 
+            range from 00 upto FF (both inclusive), separated by a colon. 
+                PROMPT> talk.exe 1:2 1:1
+
+            After starting the program, destination IIP address is asked for. It
+            is to be provided in the same format as above. At any point in the 
+            conversation the destination IIP address can be changed by pressing
+            the key combination 'Ctrl-D'. The rest works just as in the dostalk 
+            version for assignement 1.
+
+Both of the above programs relies on one (in case of router, two) file(s) 
+containing list of IIP addresses with corresponding MAC addresses. Name of the 
+files in the current DOS setup are 'iiplist1' for network 1 and 'iiplist2' for 
+network 2.
+--------------------------------------------------------------------------------
+
+Routing: pending...
